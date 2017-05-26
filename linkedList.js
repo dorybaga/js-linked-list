@@ -7,6 +7,13 @@ function linkedListGenerator(){
   var head = null;
   var tail = null;
 
+  function makeNode(val) {
+    return {
+      value: val,
+      next: null
+    };
+  }
+
   // var linkedListEx = {
   //   nodeVal: " ",
   //   nodeNext: {
@@ -36,17 +43,35 @@ function linkedListGenerator(){
     return tail;
   }
 
-  function add() {
-    //if head is null, head becomes new node ELSE getTail set tail's next to newNode {value : "", next : null}
-    }
+  function add(val) {
+    // fresh node, don't know what next is --> next = null
+    var newNode = makeNode(val);
+    // console.log(newNode);
 
-  function get() {
-    //@param nodeNum, return node[nodeNum]
+    // check if head is null; if head is null set head to newNode
+    if (head === null) {
+      head = newNode;
+      // console.log(head);
+
+    // getTail set tail's next to newNode {value : "", next : null}
+    } else {
+      getTail().next = newNode;
+      }
+
+    // tail becomes newNode
+    tail = newNode;
+    // console.log(tail);
+    return newNode;
+  }
+
+  function get(nodeNum) {
+    //@param nodeNum, call getHead() to find head, then follow (iterate?) through next node until nodeNum is found, return node[nodeNum]
+    getHead();
 
   }
 
   function remove() {
-    //@param nodeNum, return node[nodeNum] & delete it, check next of new tail and make null, if nodeNum > linkedListEx.length return false
+    //call get() & delete that node, check next of new tail and make null, if nodeNum > linkedListEx.length return false
   }
 
   function insert() {
