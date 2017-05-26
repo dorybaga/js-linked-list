@@ -86,13 +86,34 @@ function linkedListGenerator(){
   }
 
   function remove(nodeIndex) {
-    //call get() & delete that node, check next of new tail and make null, if nodeIndex > linkedListEx.length return false
+    var currentNode = get(nodeIndex);
+    var prevNode = get(nodeIndex - 1);
+    var nextNode = get(nodeIndex + 1);
 
+    // console.log(currentNode);
+    // console.log("---------");
+    // console.log(prevNode);
+    // console.log("---------");
+    // console.log(nextNode);
 
+    if (currentNode === false) {      // if node doesn't exist return false
+      return false;
+    }
+    if (nodeIndex === 0) {            // if current node is the head
+      head = nextNode;                // set the next node to the head
+    }
+    if (currentNode.next === null) {  // if current node is the tail
+      prevNode.next = null;           // set the prev node's next to null
+      tail = prevNode;                // prev node becomes the tail
+    } else {                          // if the current node is in the middle
+      prevNode.next = nextNode;       // set the prev node's next to the next node
+    }
   }
 
   function insert() {
-    //@param
+    //insert at head
+    //insert inbetween
+    //insert at tail
   }
 
   return {
