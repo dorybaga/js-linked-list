@@ -64,14 +64,31 @@ function linkedListGenerator(){
     return newNode;
   }
 
-  function get(nodeNum) {
-    //@param nodeNum, call getHead() to find head, then follow (iterate?) through next node until nodeNum is found, return node[nodeNum]
-    getHead();
+  function get(nodeIndex) {
+    //start from the head, then follow (iterate?) through next node until nodeIndex is found
+    var currentNode = head;
 
+    if (currentNode > nodeIndex) {
+        return false;
+
+    } else {
+      for (var i = 0; i < nodeIndex; i++) {
+        currentNode = currentNode.next;
+        if (currentNode === null) {
+          return false;
+        }
+
+      }
+    }
+
+    // console.log(currentNode);
+    return currentNode;
   }
 
-  function remove() {
-    //call get() & delete that node, check next of new tail and make null, if nodeNum > linkedListEx.length return false
+  function remove(nodeIndex) {
+    //call get() & delete that node, check next of new tail and make null, if nodeIndex > linkedListEx.length return false
+
+
   }
 
   function insert() {
@@ -90,5 +107,3 @@ function linkedListGenerator(){
   };
 
 }
-
-var myLL = linkedListGenerator();
