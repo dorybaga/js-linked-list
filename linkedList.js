@@ -14,61 +14,33 @@ function linkedListGenerator(){
     };
   }
 
-  // var linkedListEx = {
-  //   nodeVal: " ",
-  //   nodeNext: {
-  //     nodeVal: " "
-  //     nodeNext {
-  //      nodeVal: " "
-  //      nodeNext: null
-  //     }
-  // }
-
-  // var linkedListEx = [{node1}, {node2}, {node3}]
-
-  // var node = {
-  //   nodeVal: " ",
-  //   nodeNext: {
-  //      nodeVal: " ",
-  //      nodeNext:
-  //   }
-  //}
-
   function getHead() {
     return head;
   }
 
   function getTail() {
-    //return the node where next = null
-    return tail;
+    return tail;                                      // return the node where next = null
+
   }
 
   function add(val) {
-    // fresh node, don't know what next is --> next = null
-    var newNode = makeNode(val);
+    var newNode = makeNode(val);                      // fresh node, don't know what next is --> next = null
     // console.log(newNode);
 
-    // check if head is null; if head is null set head to newNode
-    if (head === null) {
+    if (head === null) {                              // check if head is null; if head is null set head to newNode
       head = newNode;
       // console.log(head);
-
-    // getTail set tail's next to newNode {value : "", next : null}
-    } else {
+    } else {                                          // getTail set tail's next to newNode {value : "", next : null}
       getTail().next = newNode;
       }
-
-    // tail becomes newNode
-    tail = newNode;
+    tail = newNode;                                   // tail becomes new node
     // console.log(tail);
     return newNode;
   }
 
   function get(nodeIndex) {
-    //start from the head, then follow (iterate?) through next node until nodeIndex is found
-    var currentNode = head;
-
-    if (currentNode > nodeIndex) {
+    var currentNode = head;                           // start at head, iterate through until nodeIndex is found
+    if (currentNode > nodeIndex) {                    // if current node does not exist return false
         return false;
 
     } else {
@@ -96,24 +68,38 @@ function linkedListGenerator(){
     // console.log("---------");
     // console.log(nextNode);
 
-    if (currentNode === false) {      // if node doesn't exist return false
+    if (currentNode === false) {                     // if node doesn't exist return false
       return false;
-    }
-    if (nodeIndex === 0) {            // if current node is the head
-      head = nextNode;                // set the next node to the head
-    }
-    if (currentNode.next === null) {  // if current node is the tail
-      prevNode.next = null;           // set the prev node's next to null
-      tail = prevNode;                // prev node becomes the tail
-    } else {                          // if the current node is in the middle
-      prevNode.next = nextNode;       // set the prev node's next to the next node
+    } else if (nodeIndex === 0) {                    // if current node is the head
+      head = nextNode;                               // set the next node to the head
+    } else if (currentNode.next === null) {          // if current node is the tail
+      prevNode.next = null;                          // set the prev node's next to null
+      tail = prevNode;                               // prev node becomes the tail
+    } else {                                         // if the current node is in the middle
+      prevNode.next = nextNode;                      // set the prev node's next to the next node
     }
   }
 
-  function insert() {
-    //insert at head
-    //insert inbetween
-    //insert at tail
+  function insert(val, nodeIndex) {
+    var currentNode = get(nodeIndex);
+    var prevNode = get(nodeIndex - 1);
+    var nextNode = get(nodeIndex + 1);
+    var newNode = makeNode(val);
+
+    if (currentNode === false || nodeIndex < 0) {   // if current node does not exist return false
+      return false;
+    } else if (nodeIndex === 0) {                   // if current node is the head
+      newNode.next = head;                          // set the current node's next to the next node
+      head = newNode;                               // new node becomes head
+    } else if (currentNode === null) {              // if current node is the tail
+      currentNode.next = newNode;                   // set current node's next to new node
+      tail = newNode;                               // new node becomes the tail
+    } else {
+        prevNode.next = newNode;                    // if node is somewhere else and exists
+        newNode.next = currentNode;
+
+                                                    // make prev node's next to new node
+    }                                               // and make new node's next set to next node
   }
 
   return {
@@ -128,3 +114,16 @@ function linkedListGenerator(){
   };
 
 }
+
+
+var ll = linkedListGenerator();
+// ll.add("one");
+// ll.add("two");
+// ll.add("three");
+
+// console.log(ll.getHead());
+// console.log(ll.getTail());
+
+// ll.remove(2);
+// console.log(ll.getTail().value);              // two
+
