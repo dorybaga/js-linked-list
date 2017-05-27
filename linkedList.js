@@ -89,17 +89,15 @@ function linkedListGenerator(){
     if (currentNode === false || nodeIndex < 0) {   // if current node does not exist return false
       return false;
     } else if (nodeIndex === 0) {                   // if current node is the head
-      newNode.next = head;                          // set the current node's next to the next node
+      newNode.next = head;                          // set the new node's next to head
       head = newNode;                               // new node becomes head
     } else if (currentNode === null) {              // if current node is the tail
       currentNode.next = newNode;                   // set current node's next to new node
-      tail = newNode;                               // new node becomes the tail
-    } else {
-        prevNode.next = newNode;                    // if node is somewhere else and exists
-        newNode.next = currentNode;
-
-                                                    // make prev node's next to new node
-    }                                               // and make new node's next set to next node
+      tail = newNode;                               // new node then becomes the tail
+    } else {                                        // if node is somewhere else and exists
+        prevNode.next = newNode;                    // prev node's next becomes new node
+        newNode.next = currentNode;                 // make the new node's next to current node (shifts to right)
+    }
   }
 
   return {
@@ -114,16 +112,4 @@ function linkedListGenerator(){
   };
 
 }
-
-
-var ll = linkedListGenerator();
-// ll.add("one");
-// ll.add("two");
-// ll.add("three");
-
-// console.log(ll.getHead());
-// console.log(ll.getTail());
-
-// ll.remove(2);
-// console.log(ll.getTail().value);              // two
 
